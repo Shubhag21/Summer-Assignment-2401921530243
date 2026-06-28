@@ -1,1 +1,163 @@
+#include <iostream>
+using namespace std;
 
+//===================== Question 1 =====================
+
+// Interface
+class Test {
+public:
+    virtual int square(int) = 0;
+};
+
+// Arithmetic class implementing Test
+class Arithmetic : public Test {
+public:
+    int square(int x) {
+        return x * x;
+    }
+};
+
+// ToTestInt class
+class ToTestInt {
+public:
+    void display() {
+        Arithmetic obj;
+        int n;
+        cout << "Enter a number: ";
+        cin >> n;
+        cout << "Square = " << obj.square(n) << endl;
+    }
+};
+
+//===================== Question 2 =====================
+
+class Outer {
+public:
+    void display() {
+        cout << "Display function of Outer class" << endl;
+    }
+
+    class Inner {
+    public:
+        void display() {
+            cout << "Display function of Inner class" << endl;
+        }
+    };
+};
+
+//===================== Question 3 =====================
+
+class Point {
+private:
+    int x, y;
+
+public:
+    Point() {
+        x = 0;
+        y = 0;
+    }
+
+    Point(int x, int y) {
+        this->x = x;
+        this->y = y;
+    }
+
+    void setX(int x) {
+        this->x = x;
+    }
+
+    void setY(int y) {
+        this->y = y;
+    }
+
+    void setXY(int x, int y) {
+        this->x = x;
+        this->y = y;
+    }
+
+    void display() {
+        cout << "Point = (" << x << ", " << y << ")" << endl;
+    }
+};
+
+//===================== Question 4 =====================
+
+class Box {
+protected:
+    int length, breadth;
+
+public:
+    Box(int l = 0, int b = 0) {
+        length = l;
+        breadth = b;
+    }
+
+    void setValue(int l, int b) {
+        length = l;
+        breadth = b;
+    }
+
+    int area() {
+        return length * breadth;
+    }
+};
+
+class Box3D : public Box {
+private:
+    int height;
+
+public:
+    Box3D(int l = 0, int b = 0, int h = 0) : Box(l, b) {
+        height = h;
+    }
+
+    void setValue(int l, int b, int h) {
+        length = l;
+        breadth = b;
+        height = h;
+    }
+
+    int volume() {
+        return length * breadth * height;
+    }
+};
+
+//===================== Main Function =====================
+
+int main() {
+
+    cout << "===== Question 1 =====" << endl;
+    ToTestInt t;
+    t.display();
+
+    cout << "\n===== Question 2 =====" << endl;
+    Outer out;
+    Outer::Inner in;
+    out.display();
+    in.display();
+
+    cout << "\n===== Question 3 =====" << endl;
+    Point p1;
+    Point p2(10, 20);
+
+    p1.display();
+    p2.display();
+
+    p1.setX(5);
+    p1.setY(15);
+    p1.display();
+
+    p2.setXY(30, 40);
+    p2.display();
+
+    cout << "\n===== Question 4 =====" << endl;
+    Box b;
+    b.setValue(10, 5);
+    cout << "Area = " << b.area() << endl;
+
+    Box3D b3;
+    b3.setValue(10, 5, 4);
+    cout << "Volume = " << b3.volume() << endl;
+
+    return 0;
+}
